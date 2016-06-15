@@ -1,0 +1,362 @@
+
+@prefixCls: rc-editor;
+
+.@{prefixCls} {
+  &-root {
+    border: solid 1px #ccc;
+  }
+  &-menu-container {
+    border-bottom: 1px solid #f1f1f1;
+    height: 31px;
+
+    a {
+      text-decoration:none;
+    }
+
+    input[type=text] {
+      border: none;
+      border-bottom: 1px solid #ccc;
+      font-size: 14px;
+      height: 20px;
+      color: #333;
+      padding: 3px 0;
+      width: 100%;
+    }
+    input[type=text]:focus {
+      outline: none;
+      border-bottom: 1px solid #1e88e5;
+    }
+  }
+
+  //操作菜单
+  &-menu-group {
+    float: left;
+    padding: 0 8px;
+    border-right: 1px solid #f1f1f1;
+  }
+  &-menu-item {
+    float: left;
+    width: 35px;
+    height: 31px;
+  }
+  &-menu-item span {
+    display: block;
+    text-align: center;
+    color: #666;
+    width: 100%;
+    padding: 8px 0;
+    font-size: .9em;
+    cursor: pointer;
+  }
+  &-menu-item span:hover {
+    background-color: #f1f1f1;
+  }
+  &-menu-item .icon{
+    color: #666;
+  }
+  &-menu-item .active{
+    color: #1e88e5;
+  }
+
+  &-menu-drop-list {
+    min-width: 150px;
+    box-shadow: 1px 3px 3px #999;
+  }
+  &-menu-drop-item {
+    background-color: #fff;
+    cursor: pointer;
+    padding: 3px 5px;
+    color: #666;
+    font-size: 14px;
+  }
+  &-menu-drop-item:hover {
+    background-color: #eee;
+  }
+
+
+  //颜色面板
+  &-menu-color-panel {
+
+    .@{prefixCls}-menu-drop-item {
+      float: left;
+
+      a {
+        display: block;
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+
+  //链接
+  &-menu-link-panel {
+    .@{prefixCls}-menu-drop-list {
+      width: 260px;
+      font-size: 12px;
+    }
+
+    .@{prefixCls}-menu-link-input {
+      padding: 10px;
+    }
+
+    .@{prefixCls}-menu-link-button {
+      padding: 5px;
+
+      button {
+        float: right;
+        margin-left: 10px;
+        font-size: 14px;
+        color: #1e88e5;
+        border: none;
+        padding: 7px;
+        background-color: #fff;
+        cursor: pointer;
+        border-radius: 3px;
+      }
+      button:hover {
+        background-color: #eee;
+      }
+    }
+  }
+
+}
+
+
+
+
+
+.clear {
+  clear: both;
+}
+
+.public-DraftEditor-content {
+  height: 300px;
+  overflow: auto;
+  padding: 10px;
+}
+
+
+
+
+
+
+@font-face {
+  font-family: 'icomoon';
+  src:url('fonts/icomoon.eot?-qdfu1s');
+  src:url('fonts/icomoon.eot?#iefix-qdfu1s') format('embedded-opentype'),
+  url('fonts/icomoon.ttf?-qdfu1s') format('truetype'),
+  url('fonts/icomoon.woff?-qdfu1s') format('woff'),
+  url('fonts/icomoon.svg?-qdfu1s#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.icon {
+  font-family:"icomoon" !important;
+  font-weight: 400;
+  font-size: 12px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+.menu-item-icon-bold:before {
+  content: "\e807";
+}
+.menu-item-icon-link:before {
+  content: "\e800";
+}
+.menu-item-icon-unlink:before {
+  content: "\e801";
+}
+.menu-item-icon-code:before {
+  content: "\e802";
+}
+.menu-item-icon-cancel:before {
+  content: "\e803";
+}
+.menu-item-icon-terminal:before {
+  content: "\e804";
+}
+.menu-item-icon-angle-down:before {
+  content: "\e805";
+}
+.menu-item-icon-font:before {
+  content: "\e806";
+}
+.menu-item-icon-bold:before {
+  content: "\e807";
+}
+.menu-item-icon-italic:before {
+  content: "\e808";
+}
+.menu-item-icon-header:before {
+  content: "\e809";
+}
+.menu-item-icon-align-left:before {
+  content: "\e80a";
+}
+.menu-item-icon-align-center:before {
+  content: "\e80b";
+}
+.menu-item-icon-align-right:before {
+  content: "\e80c";
+}
+.menu-item-icon-list-bullet:before {
+  content: "\e80d";
+}
+.menu-item-icon-indent-left:before {
+  content: "\e80e";
+}
+.menu-item-icon-indent-right:before {
+  content: "\e80f";
+}
+.menu-item-icon-list-numbered:before {
+  content: "\e810";
+}
+.menu-item-icon-underline:before {
+  content: "\e811";
+}
+.menu-item-icon-table:before {
+  content: "\e812";
+}
+.menu-item-icon-eraser:before {
+  content: "\e813";
+}
+.menu-item-icon-font-size:before {
+  content: "\e814";
+}
+.menu-item-icon-brush:before {
+  content: "\e815";
+}
+.menu-item-icon-pencil:before {
+  content: "\e816";
+}
+.menu-item-icon-minus:before {
+  content: "\e817";
+}
+.menu-item-icon-picture:before {
+  content: "\e818";
+}
+.menu-item-icon-file-image:before {
+  content: "\e819";
+}
+.menu-item-icon-cw:before {
+  content: "\e81a";
+}
+.menu-item-icon-ccw:before {
+  content: "\e81b";
+}
+.menu-item-icon-music:before {
+  content: "\e911";
+}
+.menu-item-icon-play:before {
+  content: "\e912";
+}
+.menu-item-icon-location:before {
+  content: "\e947";
+}
+.menu-item-icon-happy:before {
+  content: "\e9df";
+}
+.menu-item-icon-sigma:before {
+  content: "\ea67";
+}
+.menu-item-icon-enlarge2:before {
+  content: "\e98b";
+}
+.menu-item-icon-shrink2:before {
+  content: "\e98c";
+}
+.menu-item-icon-newspaper:before {
+  content: "\e904";
+}
+.menu-item-icon-camera:before {
+  content: "\e90f";
+}
+.menu-item-icon-video-camera:before {
+  content: "\e914";
+}
+.menu-item-icon-file-zip:before {
+  content: "\e92b";
+}
+.menu-item-icon-stack:before {
+  content: "\e92e";
+}
+.menu-item-icon-credit-card:before {
+  content: "\e93f";
+}
+.menu-item-icon-address-book:before {
+  content: "\e944";
+}
+.menu-item-icon-envelop:before {
+  content: "\e945";
+}
+.menu-item-icon-drawer:before {
+  content: "\e95c";
+}
+.menu-item-icon-download:before {
+  content: "\e960";
+}
+.menu-item-icon-upload:before {
+  content: "\e961";
+}
+.menu-item-icon-lock:before {
+  content: "\e98f";
+}
+.menu-item-icon-unlocked:before {
+  content: "\e990";
+}
+.menu-item-icon-wrench:before {
+  content: "\e991";
+}
+.menu-item-icon-eye:before {
+  content: "\e9ce";
+}
+.menu-item-icon-eye-blocked:before {
+  content: "\e9d1";
+}
+.menu-item-icon-command:before {
+  content: "\ea4e";
+}
+.menu-item-icon-font-family:before {
+  content: "\ea5c";
+}
+.menu-item-icon-libreoffice:before {
+  content: "\eade";
+}
+.menu-item-icon-quotes-left:before {
+  content: "\e977";
+}
+.menu-item-icon-strikethrough:before {
+  content: "\ea65";
+}
+.menu-item-icon-desktop:before {
+  content: "\f108";
+}
+.menu-item-icon-tablet:before {
+  content: "\f10a";
+}
+.menu-item-icon-search-plus:before {
+  content: "\f00e";
+}
+.menu-item-icon-search-minus:before {
+  content: "\f010";
+}
+.menu-item-icon-trash-o:before {
+  content: "\f014";
+}
+.menu-item-icon-align-justify:before {
+  content: "\f039";
+}
+.menu-item-icon-arrows-v:before {
+  content: "\f07d";
+}
+.menu-item-icon-sigma2:before {
+  content: "\ea68";
+}
+.menu-item-icon-omega:before {
+  content: "\e900";
+}
+.menu-item-icon-cancel-circle:before {
+  content: "\e901";
+}
