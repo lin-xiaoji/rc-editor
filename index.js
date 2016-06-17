@@ -1,8 +1,14 @@
 import React from 'react'
 import {render} from 'react-dom'
-import RcEditor from './dist/lib';
+import RcEditor from './src';
+
+const plugins = {
+    hello:{
+        e: function () {
+            alert(1);
+        }
+    }
+};
 
 
-
-
-render(<RcEditor /> ,document.getElementById("app"))
+render(<RcEditor plugins={plugins} /> ,document.getElementById("app"))

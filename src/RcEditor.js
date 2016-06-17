@@ -30,6 +30,7 @@ class RcEditor extends React.Component {
             dropListVisible: false
         };
         this.onChange = (editorState) => this.setState({editorState});
+        this.props.plugins.hello.e();
     }
     static get defaultProps() {
         return {
