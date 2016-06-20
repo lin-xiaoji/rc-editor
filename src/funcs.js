@@ -1,6 +1,6 @@
 import { sizeArr,colorArr } from './Constants'
 //菜单栏激活状态
-let menuItemActive = function (type,currentStyle,blockType) {
+let toolbarItemActive = function (type,currentStyle,blockType) {
 	//字体
 	let styleActive = false;
 	if(type == 'font-family') {
@@ -72,4 +72,4 @@ let inArray = function(stringToSearch, arrayToSearch) {
 };
 
 
-export { inArray, menuItemActive }
+export { inArray, toolbarItemActive }

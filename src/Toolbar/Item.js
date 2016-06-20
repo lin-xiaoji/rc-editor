@@ -25,15 +25,17 @@ const MenuItem = React.createClass({
         e.preventDefault();
         e.stopPropagation();
         let props = this.props;
+
         //显示下拉列表
         if(inArray(props.type,this.subArr)) {
             this.toggleDropList();
             return false;
         }
 
-        if (props.blockType) {
+
+        if (props.blockType) { //有序和无序列表
             props.toggleBlockType(props.blockType);
-        } else {
+        } else { //加粗，下划线等基本样式
             props.toggleInlineStyle(props.type.toUpperCase());
         }
     },

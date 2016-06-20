@@ -1,18 +1,19 @@
 import React from 'react';
-import MenuGroup from './Group';
-import MenuItem from './Item';
-import { menuItemActive } from './../funcs'
+import Group from './Group';
+import Item from './Item';
+import { toolbarItemActive } from './../funcs'
 
-const EditorMenu = (props) => {
-	const currentStyle = props.editorState.getCurrentInlineStyle();
-	const {editorState} = props;
-	const selection = editorState.getSelection();
-	const blockType = editorState
-		.getCurrentContent()
-		.getBlockForKey(selection.getStartKey())
-		.getType();
-	const menuData = [
-		[
+const EditorMenu = React.createClass({
+	render() {
+		const props = this.props;
+		const currentStyle = props.editorState.getCurrentInlineStyle();
+		const {editorState} = props;
+		const selection = editorState.getSelection();
+		const blockType = editorState
+			.getCurrentContent()
+			.getBlockForKey(selection.getStartKey())
+			.getType();
+		let toolbarData = [
 			{type:'bold', title:'加粗'},
 			{type:'underline', title:'下划线'},
 			{type:'italic', title:'斜体'},
@@ -21,21 +22,23 @@ const EditorMenu = (props) => {
 			{type:'brush', title:'背景颜色'},
 			{type:'font-family', title:'字体'},
 			{type:'font-size', title:'字号'},
-		],
-		[
 			{type:'header', title:'标题'},
 			{type:'list-bullet', title:'无序列表', blockType:'unordered-list-item'},
 			{type:'list-numbered', title:'有序列表', blockType:'ordered-list-item'},
-			{type:'link', title:'添加链接', link:true},
-		]
-	];
-	//console.log(currentStyle);
-	const menu = menuData.map((menuGroup,i) => {
-		let items = menuGroup.map((menuItem,j) =>{
-			//菜单激活状态
-			let active = menuItemActive(menuItem.type,currentStyle,blockType);
+			{type:'link', title:'添加链接'},
+		];
 
-			return <MenuItem
+		//添加处理插件
+		props.plugins.map((plugin) => {
+			toolbarData.push(plugin);
+		});
+
+		//console.log(currentStyle);
+		const toolbar = toolbarData.map((menuItem,j) =>{
+			//工具栏激活状态
+			let active = toolbarItemActive(menuItem.type,currentStyle,blockType);
+
+			return <Item
 				key={j}
 				type={menuItem.type}
 				title={menuItem.title}
@@ -45,15 +48,11 @@ const EditorMenu = (props) => {
 				{...props} />;
 		});
 		return (
-			<MenuGroup key={i} {...props}>
-				{items}
-			</MenuGroup>
+			<div className={`${props.prefixCls}-menu-container`}>
+				{toolbar}
+			</div>
 		)
-	});
-	return (
-		<div className={`${props.prefixCls}-menu-container`}>
-			{menu}
-		</div>
-	)
-};
+	}
+
+});
 export default EditorMenu;

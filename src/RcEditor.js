@@ -30,8 +30,10 @@ class RcEditor extends React.Component {
             dropListVisible: false
         };
         this.onChange = (editorState) => this.setState({editorState});
-        this.props.plugins.hello.e();
+
     }
+
+
     static get defaultProps() {
         return {
             prefixCls: 'rc-editor'
@@ -78,6 +80,7 @@ class RcEditor extends React.Component {
 
     componentDidMount() {
         this.refs.editor.focus();
+        //this.props.plugins.hello.click(this);
     }
 
     render() {
