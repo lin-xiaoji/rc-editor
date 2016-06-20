@@ -16,6 +16,13 @@ const Link = (props) => {
 
 
 class RcEditor extends React.Component {
+    static get defaultProps() {
+        return {
+            prefixCls: 'rc-editor',
+            items:['my','italic','underline','strikethrough']
+        }
+    }
+
     constructor(props) {
         super(props);
         const decorator = new CompositeDecorator([
@@ -33,12 +40,6 @@ class RcEditor extends React.Component {
 
     }
 
-
-    static get defaultProps() {
-        return {
-            prefixCls: 'rc-editor'
-        }
-    }
 
     _findLinkEntities(contentBlock, callback) {
         contentBlock.findEntityRanges(
@@ -91,9 +92,11 @@ class RcEditor extends React.Component {
                     toggleBlockType={this.toggleBlockType.bind(this)}
                     toggleLink={this.toggleLink.bind(this)}
                     editorState={this.state.editorState}
+                    editor={this}
                     dropListVisible={this.state.dropListVisible}
                     {...this.props}
                     />
+                <div className="clear" />
                 <Editor
                     customStyleMap={styleMap}
                     editorState={this.state.editorState}

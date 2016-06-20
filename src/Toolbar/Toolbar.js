@@ -1,9 +1,15 @@
 import React from 'react';
 import Group from './Group';
 import Item from './Item';
+import Bold from '../components/Bold';
 import { toolbarItemActive } from './../funcs'
+import inline from '../plugins/inline';
 
 const EditorMenu = React.createClass({
+	handleCommand(e){
+		e.preventDefault();
+		e.stopPropagation();
+	},
 	render() {
 		const props = this.props;
 		const currentStyle = props.editorState.getCurrentInlineStyle();
@@ -14,41 +20,50 @@ const EditorMenu = React.createClass({
 			.getBlockForKey(selection.getStartKey())
 			.getType();
 		let toolbarData = [
-			{type:'bold', title:'加粗'},
-			{type:'underline', title:'下划线'},
-			{type:'italic', title:'斜体'},
-			{type:'strikethrough', title:'删除线'},
-			{type:'pencil', title:'文字颜色'},
-			{type:'brush', title:'背景颜色'},
-			{type:'font-family', title:'字体'},
-			{type:'font-size', title:'字号'},
-			{type:'header', title:'标题'},
-			{type:'list-bullet', title:'无序列表', blockType:'unordered-list-item'},
-			{type:'list-numbered', title:'有序列表', blockType:'ordered-list-item'},
-			{type:'link', title:'添加链接'},
+			{name:'pencil'},
+			{name:'brush'},
+			{name:'font-family'},
+			{name:'font-size'},
+			{name:'header'},
+			{name:'list-bullet', blockType:'unordered-list-item'},
+			{name:'list-numbered', blockType:'ordered-list-item'},
+			{name:'link'},
 		];
 
-		//添加处理插件
-		props.plugins.map((plugin) => {
-			toolbarData.push(plugin);
-		});
+		toolbarData = inline.concat(toolbarData);
 
-		//console.log(currentStyle);
-		const toolbar = toolbarData.map((menuItem,j) =>{
+
+		//语言设置
+		var rcEditorLang = require('../lang/'+ props.lang);
+
+		const toolbar0 = toolbarData.map((menuItem,j) =>{
 			//工具栏激活状态
-			let active = toolbarItemActive(menuItem.type,currentStyle,blockType);
+			let active = toolbarItemActive(menuItem.name,currentStyle,blockType);
 
 			return <Item
 				key={j}
-				type={menuItem.type}
-				title={menuItem.title}
+				name={menuItem.name}
+				title={rcEditorLang[menuItem.name]}
+				click={menuItem.click}
 				blockType={menuItem.blockType}
 				link={menuItem.link}
 				active={ active }
 				{...props} />;
 		});
+
+		const toolbar = props.items.map((item,i) =>{
+			//先从自定义插件里查找，如果没有，就载入系统预置组件
+			let Plugin
+			if(props.plugins[item]){
+				Plugin = props.plugins[item];
+			} else {
+				Plugin = require('../components/'+ item.replace(/(\w)/,function(v){return v.toUpperCase()}));
+			}
+
+			return <Plugin key={i} {...props} />
+		});
 		return (
-			<div className={`${props.prefixCls}-menu-container`}>
+			<div className={`${props.prefixCls}-menu-container`} onMouseDown={this.handleCommand}>
 				{toolbar}
 			</div>
 		)
