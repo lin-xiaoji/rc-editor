@@ -12,5 +12,5 @@ const plugins = {
 render(<RcEditor
     plugins={plugins}
     lang="zh-CN"
-
+    items={['my','italic','underline','pencil']}
     /> ,document.getElementById("app"))

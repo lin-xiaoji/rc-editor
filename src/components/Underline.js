@@ -3,9 +3,10 @@ module.exports = (props) => {
     function handleCommand() {
         props.toggleInlineStyle('UNDERLINE');
     }
+    let active = props.currentStyle.has('UNDERLINE');
     return (
-        <div className={`${props.prefixCls}-menu-item`} onMouseDown={handleCommand}>
-            <i className={`menu-item-icon-underline icon `}></i>
+        <div className={`${props.prefixCls}-toolbar-item`} onMouseDown={handleCommand}>
+            <i className={`toolbar-item-icon-underline icon ${active ? 'active':''}`}></i>
         </div>
     )
 }

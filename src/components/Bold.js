@@ -3,9 +3,10 @@ module.exports = (props) => {
     function handleCommand() {
         props.toggleInlineStyle('BOLD');
     }
+    let active = props.currentStyle.has('BOLD');
     return (
-        <div className={`${props.prefixCls}-menu-item`} onMouseDown={handleCommand}>
-            <i className={`menu-item-icon-bold icon `}></i>
+        <div className={`${props.prefixCls}-toolbar-item`} onMouseDown={handleCommand}>
+            <i className={`toolbar-item-icon-bold icon ${active ? 'active':''}`}></i>
         </div>
     )
 }

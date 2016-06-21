@@ -53,7 +53,7 @@ let toolbarItemActive = function (type,currentStyle,blockType) {
 	if(inArray(blockType,blockArr)){
 		blockActive = true;
 	}
-
+console.log(type);
 	return styleActive || blockActive || currentStyle.has(type.toUpperCase());
 };
 

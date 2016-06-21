@@ -19,7 +19,7 @@ class RcEditor extends React.Component {
     static get defaultProps() {
         return {
             prefixCls: 'rc-editor',
-            items:['my','italic','underline','strikethrough']
+            items:['my','italic','underline','strikethrough','pencil']
         }
     }
 
@@ -54,14 +54,17 @@ class RcEditor extends React.Component {
         );
     }
 
+    //增加内联样式
     toggleInlineStyle(inlineStyle) {
         this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, inlineStyle));
     }
 
+    //增加块级样式
     toggleBlockType(blockType) {
         this.onChange(RichUtils.toggleBlockType(this.state.editorState, blockType));
     }
 
+    //添加链接
     toggleLink(url) {
         const editorState = this.state.editorState;
         const entityKey = Entity.create('LINK', 'MUTABLE', {url: url});
@@ -73,27 +76,38 @@ class RcEditor extends React.Component {
     }
 
 
+    //隐藏下拉菜单
     rootClick() {
         this.setState({
-            dropListVisible: false
+            menuVisible: false
         })
     }
 
     componentDidMount() {
-        this.refs.editor.focus();
+        //this.refs.editor.focus();
         //this.props.plugins.hello.click(this);
     }
 
     render() {
+        //获取当前样式和模块样式，用于标识工具栏激活状态
+        const editorState = this.state.editorState;
+        const currentStyle = editorState.getCurrentInlineStyle();
+        const selection = editorState.getSelection();
+        const blockType = editorState
+            .getCurrentContent()
+            .getBlockForKey(selection.getStartKey())
+            .getType();
+
+
         return (
             <div className={`${this.props.prefixCls}-root`} onMouseDown={this.rootClick.bind(this)}>
                 <Toolbar
                     toggleInlineStyle={this.toggleInlineStyle.bind(this)}
                     toggleBlockType={this.toggleBlockType.bind(this)}
                     toggleLink={this.toggleLink.bind(this)}
-                    editorState={this.state.editorState}
-                    editor={this}
-                    dropListVisible={this.state.dropListVisible}
+                    currentStyle={currentStyle}
+                    blockType={blockType}
+                    menuVisible={this.state.menuVisible}
                     {...this.props}
                     />
                 <div className="clear" />
