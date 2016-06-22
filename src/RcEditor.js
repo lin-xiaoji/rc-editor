@@ -1,6 +1,6 @@
 import React from 'react';
 import { Editor, EditorState, RichUtils, Entity, CompositeDecorator } from 'draft-js';
-import Toolbar from './Toolbar/Toolbar';
+import Toolbar from './Toolbar';
 import styleMap from './StyleMap';
 import '../assets/index.less'
 
@@ -19,7 +19,8 @@ class RcEditor extends React.Component {
     static get defaultProps() {
         return {
             prefixCls: 'rc-editor',
-            items:['my','italic','underline','strikethrough','pencil']
+            lang: 'zh-CN',
+            items:['bold','italic','underline','color','strikethrough','bgColor','font','size','head','UnorderedList','OrderedList']
         }
     }
 
@@ -34,7 +35,7 @@ class RcEditor extends React.Component {
 
         this.state = {
             editorState: EditorState.createEmpty(decorator),
-            dropListVisible: false
+            menuVisible: false
         };
         this.onChange = (editorState) => this.setState({editorState});
 

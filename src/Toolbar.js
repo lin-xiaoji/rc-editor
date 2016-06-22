@@ -7,17 +7,19 @@ const EditorMenu = React.createClass({
 	},
 	render() {
 		const props = this.props;
+		const lang = require('./lang/' + props.lang);
 		const toolbar = props.items.map((item,i) =>{
 			//先从自定义插件里查找，如果没有，就载入系统预置组件
 			let Plugin;
 			if(props.plugins[item]){
 				Plugin = props.plugins[item];
 			} else {
-				Plugin = require('../components/'+ item.replace(/(\w)/,function(v){return v.toUpperCase()}));
+				Plugin = require('./plugins/'+ item.replace(/(\w)/,function(v){return v.toUpperCase()}));
 			}
 
 			return <Plugin
 				key={i}
+				title={lang[item]}
 				{...props}
 				/>
 		});

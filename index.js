@@ -1,7 +1,7 @@
 import React from 'react'
 import {render} from 'react-dom'
 import RcEditor from './src';
-import My from './src/components/Bold';
+import My from './src/plugins/Bold';
 
 
 const plugins = {
@@ -12,5 +12,4 @@ const plugins = {
 render(<RcEditor
     plugins={plugins}
     lang="zh-CN"
-    items={['my','italic','underline','pencil']}
     /> ,document.getElementById("app"))
