@@ -1,6 +1,6 @@
 import React from 'react';
 import Menu from '../Menu';
-import Mixin from '../Mixin';
+import Mixin from '../MenuMixin';
 module.exports = React.createClass({
     mixins:[Mixin],
 

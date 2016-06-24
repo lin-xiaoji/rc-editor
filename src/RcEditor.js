@@ -20,7 +20,7 @@ class RcEditor extends React.Component {
         return {
             prefixCls: 'rc-editor',
             lang: 'zh-CN',
-            items:['bold','italic','underline','color','strikethrough','bgColor','font','size','head','UnorderedList','OrderedList']
+            items:['bold','italic','underline','color','strikethrough','bgColor','font','size','head','UnorderedList','OrderedList','link']
         }
     }
 
@@ -35,10 +35,20 @@ class RcEditor extends React.Component {
 
         this.state = {
             editorState: EditorState.createEmpty(decorator),
-            menuVisible: false
         };
-        this.onChange = (editorState) => this.setState({editorState});
+    }
 
+    onChange(editorState) {
+        this.setState({editorState});
+    }
+    //快捷键
+    handleKeyCommand(command) {
+        const newState = RichUtils.handleKeyCommand(this.state.editorState, command);
+        if (newState) {
+            this.onChange(newState);
+            return true;
+        }
+        return false;
     }
 
 
@@ -76,17 +86,12 @@ class RcEditor extends React.Component {
         ));
     }
 
-
-    //隐藏下拉菜单
-    rootClick() {
-        this.setState({
-            menuVisible: false
-        })
+    focus() {
+        this.refs.editor.focus();
     }
 
     componentDidMount() {
-        //this.refs.editor.focus();
-        //this.props.plugins.hello.click(this);
+        this.focus().bind(this);
     }
 
     render() {
@@ -101,21 +106,22 @@ class RcEditor extends React.Component {
 
 
         return (
-            <div className={`${this.props.prefixCls}-root`} onMouseDown={this.rootClick.bind(this)}>
+            <div className={`${this.props.prefixCls}-root`}>
                 <Toolbar
                     toggleInlineStyle={this.toggleInlineStyle.bind(this)}
                     toggleBlockType={this.toggleBlockType.bind(this)}
                     toggleLink={this.toggleLink.bind(this)}
                     currentStyle={currentStyle}
                     blockType={blockType}
-                    menuVisible={this.state.menuVisible}
+                    focus={this.focus.bind(this)}
                     {...this.props}
                     />
                 <div className="clear" />
                 <Editor
                     customStyleMap={styleMap}
                     editorState={this.state.editorState}
-                    onChange={this.onChange}
+                    handleKeyCommand={this.handleKeyCommand.bind(this)}
+                    onChange={this.onChange.bind(this)}
                     ref="editor"
                     />
             </div>
