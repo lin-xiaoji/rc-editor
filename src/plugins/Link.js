@@ -27,7 +27,7 @@ module.exports = React.createClass({
                         </div>
                         <div className={`${props.prefixCls}-menu-link-button`}>
                             <button onMouseDown={this.addLink}>确定</button>
-                            <button onMouseDown={this.addLink}>取消</button>
+                            <button onMouseDown={this.hideMenu}>取消</button>
                             <div className="clear"></div>
                         </div>
                     </Menu>
