@@ -1,34 +1,19 @@
 import React from 'react';
 
-const EditorMenu = React.createClass({
+const Toolbar = React.createClass({
 	handleCommand(e){
 		e.preventDefault();
 		e.stopPropagation();
 	},
 	render() {
 		const props = this.props;
-		const lang = require('./lang/' + props.lang);
-		const toolbar = props.items.map((item,i) =>{
-			//先从自定义插件里查找，如果没有，就载入系统预置组件
-			let Plugin;
-			if(props.plugins[item]){
-				Plugin = props.plugins[item];
-			} else {
-				Plugin = require('./plugins/'+ item.replace(/(\w)/,function(v){return v.toUpperCase()}));
-			}
 
-			return <Plugin
-				key={i}
-				title={lang[item]}
-				{...props}
-				/>
-		});
 		return (
 			<div className={`${props.prefixCls}-toolbar-container`} onMouseDown={this.handleCommand}>
-				{toolbar}
+
 			</div>
 		)
 	}
 
 });
-export default EditorMenu;
+export default Toolbar;

@@ -1,13 +1,15 @@
 import React from 'react';
-import Menu from '../Menu';
-import Mixin from '../MenuMixin';
-module.exports = React.createClass({
-    mixins:[Mixin],
+import { RichUtils } from 'draft-js';
+import Menu  from '../../Menu';
+import MenuEnhance  from '../../MenuEnhance';
 
+
+class Head extends React.Component {
     handleCommand(e) {
         let blockType = e.currentTarget.getAttribute('data-blockType');
-        this.props.toggleBlockType(blockType);
-    },
+        this.props.setEditorState(RichUtils.toggleBlockType(this.props.getEditorState(), blockType));
+    }
+
 
     render() {
         const props = this.props;
@@ -23,7 +25,7 @@ module.exports = React.createClass({
                     className={`${props.prefixCls}-menu-item`}
                     key={i}
                     data-blockType={item.blockType}
-                    onMouseDown={this.handleCommand}
+                    onMouseDown={this.handleCommand.bind(this)}
                     dangerouslySetInnerHTML={{__html: item.label}}
                     />
             );
@@ -39,13 +41,17 @@ module.exports = React.createClass({
         }
 
         return (
-            <div className={`${props.prefixCls}-toolbar-item`} title={props.title} onMouseDown={this.toggleMenu}>
+            <div className={`${props.prefixCls}-toolbar-item`} title={props.title}>
                 <i className={`toolbar-item-icon-header icon ${active ? 'active':''}`}></i>
-
-                <Menu {...props} visible={this.state.menuVisible}>
+                <Menu {...props} visible={this.props.menuVisible}>
                     {list}
                 </Menu>
             </div>
         )
     }
-});
+}
+
+export default {
+    name: 'head',
+    component: MenuEnhance(Head)
+};
