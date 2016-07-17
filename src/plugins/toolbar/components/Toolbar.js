@@ -1,6 +1,12 @@
 import React,{Component} from 'react';
 
+
 class Toolbar extends Component {
+
+    lang = require('../../../lang/'+this.props.lang);
+    constructor(props){
+        super(props);
+    }
 
     handleCommand(e){
         e.preventDefault();
@@ -24,6 +30,7 @@ class Toolbar extends Component {
             if(Component) {
                 return <Component
                     prefixCls={this.props.prefixCls}
+                    title={this.lang[item]}
                     setEditorState={this.props.setEditorState}
                     getEditorState={this.props.getEditorState}
                     currentStyle={this.props.currentStyle}

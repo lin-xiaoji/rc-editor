@@ -51,7 +51,7 @@ export default class RcEditor extends Component {
             linkPlugin,
             unlinkPlugin,
         ],
-        toolbars:['bold','italic','underline','strikethrough','|','color','bgcolor','font','size','|','head','orderList','unorderList','|','link','unlink']
+        toolbars:['bold','italic','underline','strikethrough','|','color','bgcolor','font','size','|','head','orderlist','unorderlist','|','link','unlink']
 
     };
 
@@ -92,6 +92,7 @@ export default class RcEditor extends Component {
             <div onClick={this.focus.bind(this)} className={`${this.props.prefixCls}-root`} >
                 <Toolbar
                     prefixCls={this.props.prefixCls}
+                    lang={this.props.lang}
                     setEditorState={this.onChange.bind(this)}
                     getEditorState={this.getEditorState}
                     plugins={this.state.plugins}

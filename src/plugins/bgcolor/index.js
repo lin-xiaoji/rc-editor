@@ -7,7 +7,7 @@ let styleMap = {};
 colorArr.map((item) => styleMap['BGCOLOR-'+item] = {'backgroundColor': '#'+item});
 
 const BgColor = (props) => {
-    return <Color {...props} type="BGCOLOR" />
+    return <Color {...props} type="BGCOLOR" title={props.title} />
 }
 
 export default {

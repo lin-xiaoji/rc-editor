@@ -7,7 +7,7 @@ const Underline = (props) => {
     }
     let active = props.currentStyle.has('UNDERLINE');
     return (
-        <div className={`${props.prefixCls}-toolbar-item`} onMouseDown={handleCommand}>
+        <div className={`${props.prefixCls}-toolbar-item`} title={props.title} onMouseDown={handleCommand}>
             <i className={`toolbar-item-icon-underline icon ${active ? 'active':''}`}></i>
         </div>
     )
