@@ -22,6 +22,7 @@ import unorderListPlugin from './plugins/unorderList/index';
 
 import linkPlugin from './plugins/link/index';
 import unlinkPlugin from './plugins/unlink/index';
+import imagePlugin from './plugins/image/index';
 
 
 
@@ -40,18 +41,35 @@ export default class RcEditor extends Component {
             strikethroughPlugin,
             colorPlugin,
             bgColorPlugin,
-
             splitPlugin,
             fontPlugin,
             sizePlugin,
             headPlugin,
             orderListPlugin,
             unorderListPlugin,
-
             linkPlugin,
             unlinkPlugin,
+            imagePlugin,
         ],
-        toolbars:['bold','italic','underline','strikethrough','|','color','bgcolor','font','size','|','head','orderlist','unorderlist','|','link','unlink']
+        toolbars:[
+            'bold',
+            'italic',
+            'underline',
+            'strikethrough',
+            '|',
+            'color',
+            'bgcolor',
+            'font',
+            'size',
+            '|',
+            'head',
+            'orderlist',
+            'unorderlist',
+            '|',
+            'link',
+            'unlink',
+            'image',
+        ]
 
     };
 
