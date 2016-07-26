@@ -30,7 +30,7 @@ class Media extends React.Component {
                 <div className={`${this.props.prefixCls}-menu-link-panel`}>
                     <Menu {...props} visible={this.props.menuVisible}>
                         <div className={`${props.prefixCls}-menu-link-input`}>
-                            <input type="text" defaultValue="https://www.baidu.com/img/baidu_jgylogo3.gif" ref="urlInput" onMouseDown={this.handlefocus.bind(this)} />
+                            <input type="text" defaultValue="" ref="urlInput" onMouseDown={this.handlefocus.bind(this)} />
                         </div>
                         <div className={`${props.prefixCls}-menu-link-button`}>
                             <button onMouseDown={this.insertAtomicBlock.bind(this)}>确定</button>

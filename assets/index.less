@@ -3,7 +3,6 @@
 .@{prefixCls} {
   &-root {
     border: solid 1px #ccc;
-    height: 340px;
   }
   &-source {
     border: none;
@@ -98,6 +97,10 @@
 
   //链接
   &-menu-link-panel {
+    .@{prefixCls}-toolbar-menu {
+      width: 260px;
+    }
+
     .@{prefixCls}-menu-drop-list {
       width: 260px;
       font-size: 12px;
@@ -138,8 +141,6 @@
 }
 
 .public-DraftEditor-content {
-  height: 280px;
-  overflow: auto;
   padding: 10px;
 }
 

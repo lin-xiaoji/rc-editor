@@ -1,11 +1,11 @@
 {
   "name": "rc-editor",
-  "version": "1.3.5",
+  "version": "1.5.0",
   "description": "",
   "main": "lib/index",
   "scripts": {
     "dev": "webpack-dev-server --inline --content-base public --history-api-fallback",
-    "compile": "babel src -d dist/lib --presets react,es2015"
+    "compile": "babel src -d dist/lib --presets react,es2015,stage-0"
   },
   "author": "",
   "license": "ISC",

@@ -33,6 +33,8 @@ export default class RcEditor extends Component {
     static defaultProps = {
         prefixCls: 'rc-editor',
         lang: 'zh-CN',
+        width: '700px',
+        height: '280px',
         defaultPlugins:[
             toolbarPlugin,
             boldPlugin,
@@ -107,7 +109,7 @@ export default class RcEditor extends Component {
             .getType();
 
         return (
-            <div onClick={this.focus.bind(this)} className={`${this.props.prefixCls}-root`} >
+            <div className={`${this.props.prefixCls}-root`} style={{width:this.props.width}} >
                 <Toolbar
                     prefixCls={this.props.prefixCls}
                     lang={this.props.lang}
@@ -119,7 +121,7 @@ export default class RcEditor extends Component {
                     blockType={blockType}
                     />
                 <div className="clear" />
-                <div className={`${this.props.prefixCls}-editor`}>
+                <div onClick={this.focus.bind(this)} className={`${this.props.prefixCls}-editor`} style={{height:this.props.height,overflow: 'auto'}}>
                     <Editor
                         editorState={this.state.editorState}
                         onChange={this.onChange.bind(this)}
