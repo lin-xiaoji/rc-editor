@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Menu = React.createClass({
+export default class extends React.Component {
 	render() {
 		var style = {};
 		if(!this.props.visible) {
@@ -12,5 +12,4 @@ const Menu = React.createClass({
 			</div>
 		)
 	}
-});
-export default Menu;
+};

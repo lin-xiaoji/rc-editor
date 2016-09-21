@@ -1,7 +1,11 @@
-import React, { Component } from 'react';
+import '../assets/index.less'
+
+import React, { Component, PropTypes } from 'react';
 import Editor  from 'draft-js-plugins-editor';
 import { EditorState } from 'draft-js';
-import '../assets/index.less'
+import { stateToHTML  } from 'draft-js-export-html';
+import { stateFromHTML } from 'draft-js-import-html';
+
 
 import toolbarPlugin from './plugins/toolbar';
 import splitPlugin from './plugins/split/index';
@@ -25,16 +29,34 @@ import unlinkPlugin from './plugins/unlink/index';
 import imagePlugin from './plugins/image/index';
 
 
-
 export default class RcEditor extends Component {
     constructor(props) {
         super(props);
+        const contentState = stateFromHTML(props.defaultValue);
+        this.state = {
+            editorState:  EditorState.createWithContent(contentState),
+            plugins: this.props.plugins.concat(this.props.defaultPlugins)
+        };
     }
+
+    static propTypes = {
+        prefixCls:React.PropTypes.string.isRequired,
+        lang:React.PropTypes.string.isRequired,
+        width:React.PropTypes.string.isRequired,
+        height:React.PropTypes.string.isRequired,
+        plugins:React.PropTypes.array,
+        toolbars:React.PropTypes.array,
+        onChange:React.PropTypes.func,
+        getHTML:React.PropTypes.func
+    };
+
     static defaultProps = {
         prefixCls: 'rc-editor',
         lang: 'zh-CN',
-        width: '700px',
+        width: '100%',
         height: '280px',
+        defaultValue:'',
+        plugins:[],
         defaultPlugins:[
             toolbarPlugin,
             boldPlugin,
@@ -71,14 +93,18 @@ export default class RcEditor extends Component {
             'link',
             'unlink',
             'image',
-        ]
+        ],
+
+        onChange:(editorState) => {
+
+        },
+        getHTML:(html) => {
+
+        }
 
     };
 
-    state = {
-        editorState:  EditorState.createEmpty(),
-        plugins: this.props.plugins.concat(this.props.defaultPlugins)
-    };
+
 
     getPlugins() {
         return this.state.plugins.slice();
@@ -90,6 +116,9 @@ export default class RcEditor extends Component {
         this.setState({
             editorState
         });
+        this.props.onChange(editorState);
+        let html = stateToHTML(editorState.getCurrentContent());
+        this.props.getHTML(html);
     }
 
     focus() {
@@ -121,7 +150,10 @@ export default class RcEditor extends Component {
                     blockType={blockType}
                     />
                 <div className="clear" />
-                <div onClick={this.focus.bind(this)} className={`${this.props.prefixCls}-editor`} style={{height:this.props.height,overflow: 'auto'}}>
+                <div onClick={this.focus.bind(this)}
+                     className={`${this.props.prefixCls}-editor`}
+                     style={{height:this.props.height,overflow: 'auto'}}
+                >
                     <Editor
                         editorState={this.state.editorState}
                         onChange={this.onChange.bind(this)}
