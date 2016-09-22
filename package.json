@@ -13,7 +13,7 @@
   "dependencies": {
     "draft-js": "^0.7.0",
     "draft-js-export-html": "^0.3.0",
-    "draft-js-import-html": "^0.1.10",
+    "draft-js-import-html": "^0.2.0",
     "draft-js-plugins-editor": "^1.1.0",
     "jsdom": "^9.5.0",
     "react": "^15.0.1",
