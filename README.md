@@ -125,8 +125,6 @@ npm test
 
 
 
-open coverage/ dir
-
 ## License
 
 rc-editor-core is released under the MIT license.
